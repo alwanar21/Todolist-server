@@ -7,7 +7,7 @@ export const authMiddleware = async (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
-    res
+    return res
       .status(401)
       .json({
         errors: "Unauthorized",

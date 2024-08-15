@@ -1,9 +1,10 @@
 import { ResponseError } from "../error/response-error.js";
 
-const validate = (schema, request, res) => {
+const validate = (schema, request) => {
   const result = schema.validate(request, {
     abortEarly: false,
-    allowUnknown: false,
+    // allowUnknown: false,
+    stripUnknown: true, //key value object yang tidak ada di validasi dianggap tidak ada
   });
 
   if (result.error) {

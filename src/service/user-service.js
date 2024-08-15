@@ -55,7 +55,6 @@ const login = async (request) => {
   }
 
   let token = jwt.sign({ username: user.username }, process.env.PRIVATE_TOKEN_KEY);
-  console.log(token, "token");
 
   return {
     token,

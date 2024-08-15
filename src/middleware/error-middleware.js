@@ -7,21 +7,15 @@ const errorMiddleware = async (err, req, res, next) => {
   }
 
   if (err instanceof ResponseError) {
-    res
-      .status(err.status)
-      .json({
-        message: err.message,
-        ...(err.errorDetails ? { errors: err.errorDetails } : {}),
-      })
-      .end();
+    return res.status(err.status).json({
+      message: err.message,
+      ...(err.errorDetails ? { errors: err.errorDetails } : {}),
+    });
   } else {
-    res
-      .status(500)
-      .json({
-        message: "Internal Server Error",
-        errors: err.message,
-      })
-      .end();
+    return res.status(500).json({
+      message: "Internal Server Error",
+      errors: err.message,
+    });
   }
 };
 
