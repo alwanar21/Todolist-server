@@ -37,7 +37,7 @@ const get = async (request) => {
   const id = parseInt(request.params.id, 10);
 
   if (Number.isNaN(id)) {
-    throw new ResponseError(404, "Task not found.");
+    throw new ResponseError(404, "Task not found");
   }
 
   const task = await prismaClient.task.findUnique({
@@ -47,11 +47,11 @@ const get = async (request) => {
   });
 
   if (!task) {
-    throw new ResponseError(404, "Task not found.");
+    throw new ResponseError(404, "Task not found");
   }
 
   if (task.username !== username) {
-    throw new ResponseError(403, "You do not have permission to access this task.");
+    throw new ResponseError(403, "You do not have permission to access this task");
   }
 
   return {
@@ -74,7 +74,7 @@ const remove = async (request) => {
   const id = parseInt(request.params.id, 10);
 
   if (Number.isNaN(id)) {
-    throw new ResponseError(404, "Task not found.");
+    throw new ResponseError(404, "Task not found");
   }
 
   const task = await prismaClient.task.findUnique({
@@ -84,11 +84,11 @@ const remove = async (request) => {
   });
 
   if (!task) {
-    throw new ResponseError(404, "Task not found.");
+    throw new ResponseError(404, "Task not found");
   }
 
   if (task.username !== username) {
-    throw new ResponseError(403, "You do not have permission to delete this task.");
+    throw new ResponseError(403, "You do not have permission to delete this task");
   }
 
   await prismaClient.task.delete({
@@ -98,7 +98,7 @@ const remove = async (request) => {
   });
 
   return {
-    message: `Task ${id} removed successfully`,
+    message: `Task removed successfully`,
   };
 };
 
@@ -138,7 +138,7 @@ const update = async (request) => {
   });
 
   return {
-    message: `Task ${id} updated successfully`,
+    message: `Task updated successfully`,
     data: updatedTask,
   };
 };
@@ -148,7 +148,7 @@ const updateStatus = async (request) => {
   const id = parseInt(request.params.id, 10);
 
   if (Number.isNaN(id)) {
-    throw new ResponseError(404, "Task not found.");
+    throw new ResponseError(404, "Task not found");
   }
 
   const task = await prismaClient.task.findUnique({
@@ -158,11 +158,11 @@ const updateStatus = async (request) => {
   });
 
   if (!task) {
-    throw new ResponseError(404, "Task not found.");
+    throw new ResponseError(404, "Task not found");
   }
 
   if (task.username !== username) {
-    throw new ResponseError(403, "You do not have permission to update status this task.");
+    throw new ResponseError(403, "You do not have permission to update status this task");
   }
 
   const updateStatusTask = validate(updateStatusTaskValidation, request.body);
@@ -175,7 +175,7 @@ const updateStatus = async (request) => {
   });
 
   return {
-    message: `Status Task ${id} updated successfully`,
+    message: `Status Task updated successfully`,
   };
 };
 
